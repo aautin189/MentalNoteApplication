@@ -1,0 +1,16 @@
+{
+	"name": "user-login-app",
+	"version": "1.0.0",
+	"description": "This project implements user authentication using Passport",
+	"main": "app.js",
+	"scripts": {
+		"start": "npm install && node app"
+	},
+	"author": "Abby Autin",
+	"dependencies": {
+		"express": "*",
+		"ejs": "*",
+		"shortid": "*",
+		"express-session": "*"
+	}
+}

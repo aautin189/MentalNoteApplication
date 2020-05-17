@@ -1,0 +1,1 @@
+Should be like Lab 17 in terms of the client facing side of the Mental Note application
