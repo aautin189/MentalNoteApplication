@@ -1,16 +1,17 @@
+//import all functions listed in the model file
+//and assign them to a variable called note
+const note = require('../models/note.model');		
 
-
-const note = require('../models/note.model');		//import module: note model
-
-class Controllers{							//class: Controllers
+class Controllers{							
 	
 
 
-	//return note id to the client
+	//return note object
+		//after it's been created inside the create() function
 	newNote(request,response){
-		const {date,title,cta1,cta2,message} = request.query;	//destructive all variables from Query
-		const id = note.create(date,title,cta1,cta2,message);	//invoke note's create method
-		response.json({'success': true, 'noteID': id});			//send note ID to client
+		const {date,title,cta1,cta2,message} = request.query;	//unpack all values saved in query object
+		const noteInstance = note.create(date,title,cta1,cta2,message);	//invoke note's create method
+		response.json({'success': true, 'note': noteInstance});			//save the note object an a success message in the response object
 	}
 
 

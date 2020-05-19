@@ -1,34 +1,21 @@
-
-let noteTimestamp;
-let noteTitle;
-let noteToDo;
-let noteToRemember;
-let noteMessage;
+let timestamp;
+let title;
+let message;
 
 class Note{
 
-	constructor(date,title,toDo,toRemember,message){
-		this.noteTimestamp = date;
+
+
+	//define your constructor & other methods here
+	constructor(title, message){
+		note = {};	//creating an empty object that I'm going to store these instance variables into
+		note.timestamp = Date.now();
+		note.title = title;
+		note.message = message;
 
 	}
 
 
-
 }
-
-
-
-// How do I save these static variables into local storage so that 
-// I can refer to them whenever this program is running?
-
-
-// ***********//
-// let IDLastNoteSaved;
-// let noteCollection;
-// ***********//
-
-
-// I know that each note object (stored inside of a note collection) needs to be persistent.
-
 
 

@@ -1,30 +1,24 @@
-const shortid = require('shortid');
 
 class Users{
 	
 
 	constructor(){
-		this.users = [];
+		this.users = [];	//short term, create an empty array
 
 	}
-
+	
+	//add new user to the Users{} object @ index == email
 	add(name,email,password){
-		const id = shortid.generate();
-		const user = {id:id, name:name, email:email, password:password};
-		this.users.push(user);
-		console.log(this.users);
+		
+		const user = {id:id, email:email, password:password};	//creating a user object in short-term memory
+		
+		this.users.push(user);	//taking this users array and pushing a user object onto it
+		this.users.localStorage.setItem("${email}",password);	//taking this users array and
 
 	}
 
-
-	addToLocalStorage(email,password){
-		//create new instance of User
-		//add it to local storage
-		var user = new User(email,password);
-		let serializedPassword = JSON.stringify(user.password);
-		localStorage.setItem("${email}", serializedPassword );
-	}
 }
+
 
 
 module.exports = new Users();

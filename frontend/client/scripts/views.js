@@ -1,69 +1,120 @@
-//OUTSIDE APP
-//these views will render from within the backend server
 
+//User login page
+const loginView = function(){
 
-
-
-
-
-//INSIDE APP
-//VIEW 1: should offer two options: new note & notes collection
-const mainMenuView = function(){
 	const view = document.getElementById('view');
-	const html =
+	const html = 		
+	`<section>
+		<h1>Mental Note App</h1>
+		
+		<h2>User Login: </h2>
 
-	`<section id=mainMenuView>
-		<h1>Welcome, User!</h1>
-		<button id="gotoNewNote" type="submit">New Note</button> 
-		<button id="gotoNotebook" type="submit">Notebook</button> 
-	</section>`
+		<br>
+
+		<input id='user-email' type=text placeholder='email'>
+		<input id='user-password' type=text placeholder= 'password'>
+		<button id='login-button'>Login</button>   
+		
+		<p>or</p>
+		<button id='goto-register-view-button'>New User?</button> 
+	</section>`;
 	view.innerHTML = html;
+	addController('login-button','goto-register-view-button');
+  	
 }
 
-//VIEW 2a: new note form for user input
-const newNoteView = function(){
+// Access denied 
+// add this html to the login page anytime authentication is denied
+const errorMessage = function(){
+	const view = document.getElementById('view');
+	const html =
+	`<h1>Error. Try again. </h1>`;
+	view.innerHTML += html;
+}
+
+
+
+//Register new user
+const registerView = function(){
 
 	const view = document.getElementById('view');
 	const html = 		
 
-	`<section id=newNoteView>
-		<a href=''>Home</a>
-		<a href=''>Notebook</a>
-		<h1>Add Note</h1>
-		<form id=newNoteForm>       
-			<h2 class="mental-note-header">Mental Note</h2>
-
-			<br>
+	`<section>
+		<h1>Mental Note App</h1>
+		<h2>Create new user account:</h2>      
 	
-			<input id="note-title" type="text" placeholder="Title" required=""/>
-			<input id="note-message" type="text" placeholder="Enter note" required=""/>
-			<button id="submitNote" type="submit">Save Note</button>   
-		</form>
-	</section>`
+		<br>
+		<input id='email' type=text placeholder='email'>
+		<input id='password' type=text placeholder='password'>
+		<button id='register-button'>Register</button>   
+		<br>
+		<p>or</p>
+		
+		<button id='goto-login-view-button'>User Login</button> 
+	</section>`;
 	view.innerHTML = html;
+	addController('register-button','goto-login-view-button');
+  	
+}
+
+
+//Empty note template
+const newNoteForm = function(){
+
+	const view = document.getElementById('view');
+	const html = 		
+
+	`<section>
+		
+		<button id='notebook-view-button'>Go To Notebook</button>
+		<h1>Add Note</h1>
+		       
+		<h2>Mental Note</h2>
+
+		<br>
+
+		<input id='note-title' type=text placeholder='Title'>
+		<input id='note-message' type=text placeholder='Enter Note'>
+		<button id='submit-note-button'>Save Note</button>   
+		
+	</section>`;
+	view.innerHTML = html;
+	addController('submit-note-button', 'notebook-view-button');
   	
 }
 
 
 
-//VIEW 2b: View all notes from database (Timeline view)
-const notebookView = function(){
+// backend sends a sorted array of timestamps, one for each note in user's notebook
+//this function will just print out those timestamps(formatted to date) with a button
+//below it that when clicked will request to view that specific note
+const notesListView = function(notesArray){
 	const view = document.getElementById('view');
 	const html = 		
 
-	`<section id=notebookView>
-		<a href=''>Home</a>
-		<h1>Notebook</h1>
-		<p>(note date should populate here)</p>
-		<button id="viewNote" type="submit">View Note</button> 
-		
-	</section>`
+		`<section id=notebookView>
+			<button id='goto-home-view'>Home</button>
+			<h1>Notebook</h1>
+		</section>`;
+	
 	view.innerHTML = html;
+	var id;
+	
+	for(id in notesArray){	
+		var date = new Date(id);
+		var addedHTML = 
+			`<p>${date}</p>
+			<button id='view-note-button' type="submit">View Note</button>`;
+		view.innerHTML += addedHTML;
+	}
+	addController('view-note-button');
 
 }
 
 //VIEW 3: View note from database
-const noteView = function(){
+const viewNote = function(timestamp){
+	let note = getNote(timestamp);
 	const view = document.getElementById('view');
 	const html = 		
 
@@ -74,10 +125,10 @@ const noteView = function(){
 		<p>1. (populate title)</p>
 		<p>2. (populate date)</p>
 		<p>3. (populate message)</p>
-		<button id="deleteNote" type="submit">Delete Note</button>
+		<button id="delete-note-button" type="submit">Delete Note</button>
 
-	</section>`
+	</section>`;
 	view.innerHTML = html;
-	
+	addController('delete-note-button');	
 }
 

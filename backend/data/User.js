@@ -1,26 +1,25 @@
-//Key: timestamp for a note
-//Value: Note object
 
+//save user's email address here so you can call on it later when you need to find a user's notebook (so you can add and delete notes)
+var currentUser;
 
-//import file == Note.js
+let user;
+let userEmail;
+let userPassword;
+let userNotebook;	
 
 
 class User{
 
 
-	constructor(name, email, password){
-		var user = {};
-		user.name = "${name}";
-		user.email = "${email}";
-		user.password = "${password}";
-		user.notebook = new Notebook(email);
-		addUserToLocalStorage(user);
+	constructor(email, password){
+		user = {};
+	
+		this.user.userEmail = email;
+		this.user.userPassword = password;
+		this.user.userNotebook = new Notebook(email);
+		let serializedUser = JSON.stringify(user);
+		localStorage.setItem("${password}", serializedUser);
 
-	}
-
-
-	addUserToLocalStorage(user){
-		let serializeUser = JSON.stringify(user);
-		localStorage.setItem(${user.email}, serializeUser);
 	}
 }
+
