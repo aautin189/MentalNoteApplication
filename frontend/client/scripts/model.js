@@ -33,9 +33,10 @@ async function newUser(){
 //DATA
 // is about sending and requesting data
 async function saveNote(){
+	email = getUserEmail();
 	title = getTitle();
 	message = getMessage();
-	const url = `http://localhost:3000/new?title=${title}&message=${message}`;
+	const url = `http://localhost:3000/new?email=${email}title=${title}&message=${message}`;
 	const response = await fetch(url);	//calling the server, sending those input values to it
 	const data = await response.json();	//format that response using JSON
 	noteMenuView();							//go back to the main menu

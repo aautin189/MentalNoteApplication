@@ -9,8 +9,8 @@ class Controllers{
 	//return note object
 		//after it's been created inside the create() function
 	newNote(request,response){
-		const {date,title,cta1,cta2,message} = request.query;	//unpack all values saved in query object
-		const noteInstance = note.create(date,title,cta1,cta2,message);	//invoke note's create method
+		const {email,title,message} = request.query;	//unpack all values saved in query object
+		const noteInstance = note.create(email,title,message);	//invoke note's create method
 		response.json({'success': true, 'note': noteInstance});			//save the note object an a success message in the response object
 	}
 
